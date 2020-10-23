@@ -20,3 +20,4 @@ class QuoteCreateSerializer(QuoteSerializer):
 class QuoteUpdateSerializer(QuoteSerializer):
     class Meta(QuoteSerializer.Meta):
         read_only_fields = ['author', 'email', 'rating']
+
