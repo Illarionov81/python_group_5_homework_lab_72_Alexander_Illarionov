@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -7,6 +8,7 @@ from rest_framework.viewsets import ModelViewSet, ViewSet
 from api.serializers import QuoteCreateSerializer, QuoteUpdateSerializer, QuoteSerializer
 from webapp.models import Quote, Vote
 from .permissions import QuotePermissions
+from django.contrib.sessions.models import Session
 
 
 @ensure_csrf_cookie
@@ -33,21 +35,32 @@ class QuoteViewSet(ModelViewSet):
         return QuoteSerializer
 
     @action(methods=['post'], detail=True)
-    def VoteUp(self, request, pk=None):
+    def Up(self, request, pk=None):
+        if not self.request.session.session_key:
+            self.request.session.save()
+        session = Session.objects.get(session_key=self.request.session.session_key)
         quote = get_object_or_404(Quote, pk=pk)
-        like, created = Vote.objects.get_or_create(quote=quote, user=request.sesion.key)
-        if created:
+        try:
+            print(session.session_key)
+            vote = Vote.objects.get(quote_id=quote.pk, session_key=session.session_key)
+        except ObjectDoesNotExist:
+            print(quote.status)
+            vote = Vote.objects.create(rating=1, quote_id=quote.pk, session_key=session.session_key)
             quote.rating += 1
             quote.save()
-            return Response({'pk': pk, 'rating': quote.rating})
-        else:
-            return Response(status=403)
+        return Response({'pk': pk})
 
     @action(methods=['delete'], detail=True)
-    def VoteDown(self, request, pk=None):
-        article = get_object_or_404(Article, pk=pk)
-        like = get_object_or_404(article.likes, user=request.user)
-        like.delete()
-        article.like_count -= 1
-        article.save()
-        return Response({'pk': pk, 'likes': article.like_count})
+    def Down(self, request, pk=None):
+        if not self.request.session.session_key:
+            self.request.session.save()
+        session = Session.objects.get(session_key=self.request.session.session_key)
+        quote = get_object_or_404(Quote, pk=pk)
+        try:
+            vote = Vote.objects.get(quote_id=quote.pk,  session_key=session.session_key)
+        except ObjectDoesNotExist:
+            print(quote.status)
+            vote = Vote.objects.create(rating=-1, quote_id=quote.pk, session_key=session.session_key)
+            quote.rating -= 1
+            quote.save()
+        return Response({'pk': pk})
