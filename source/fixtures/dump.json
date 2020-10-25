@@ -1,38 +1,83 @@
 [
 {
-  "model": "auth.user",
-  "pk": 1,
+  "model": "webapp.quote",
+  "pk": 18,
   "fields": {
-    "password": "pbkdf2_sha256$150000$2jvtS0kBVWQB$I3mPaiYKsrEV2NzGk01ZISxR8UipKZ6U4qTudSh/g0g=",
-    "last_login": "2020-10-25T17:49:13.126Z",
-    "is_superuser": true,
-    "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2020-10-23T08:02:55.670Z",
-    "groups": [],
-    "user_permissions": []
+    "text": "xfvzdvbdbv",
+    "author": "author",
+    "email": "email@email.com",
+    "rating": 1,
+    "status": "moderated",
+    "created_at": "2020-10-25T17:37:22.537Z"
   }
 },
 {
-  "model": "auth.user",
-  "pk": 2,
+  "model": "webapp.quote",
+  "pk": 19,
   "fields": {
-    "password": "pbkdf2_sha256$150000$HQcSWXDN9Sp5$wF6q/T8YaoAoeJcexyuezN0Qyf/gqxJtZ5d4tu01gKg=",
-    "last_login": "2020-10-25T17:50:21.254Z",
-    "is_superuser": false,
-    "username": "user",
-    "first_name": "user",
-    "last_name": "user",
-    "email": "exzample@exzamplll.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2020-10-25T17:13:09.890Z",
-    "groups": [],
-    "user_permissions": []
+    "text": "dafbvadrbarbaebva",
+    "author": "author",
+    "email": "email@email.com",
+    "rating": 0,
+    "status": "moderated",
+    "created_at": "2020-10-25T17:37:43.610Z"
+  }
+},
+{
+  "model": "webapp.quote",
+  "pk": 21,
+  "fields": {
+    "text": "zfvz dljajvbr lvj a\r\nfvazrbaebeaedrabbbbbbbbbbbbbbbbbbbbbbbbbb\r\nsrdba",
+    "author": "author",
+    "email": "email@email.com",
+    "rating": 2,
+    "status": "moderated",
+    "created_at": "2020-10-25T17:48:50.066Z"
+  }
+},
+{
+  "model": "webapp.vote",
+  "pk": 46,
+  "fields": {
+    "session_key": "sf4kzi4lkul9r5wbw3b8zesr1huitz9i",
+    "quote": 21,
+    "rating": 1
+  }
+},
+{
+  "model": "webapp.vote",
+  "pk": 47,
+  "fields": {
+    "session_key": "sf4kzi4lkul9r5wbw3b8zesr1huitz9i",
+    "quote": 19,
+    "rating": -1
+  }
+},
+{
+  "model": "webapp.vote",
+  "pk": 48,
+  "fields": {
+    "session_key": "sf4kzi4lkul9r5wbw3b8zesr1huitz9i",
+    "quote": 18,
+    "rating": 1
+  }
+},
+{
+  "model": "webapp.vote",
+  "pk": 49,
+  "fields": {
+    "session_key": "s9jw2ees1ydfo4y7ucg2crm4p43hmgbi",
+    "quote": 21,
+    "rating": 1
+  }
+},
+{
+  "model": "webapp.vote",
+  "pk": 50,
+  "fields": {
+    "session_key": "s9jw2ees1ydfo4y7ucg2crm4p43hmgbi",
+    "quote": 19,
+    "rating": 1
   }
 }
 ]
